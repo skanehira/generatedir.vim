@@ -2,7 +2,7 @@
 " Version: 0.0.1
 " Author: skanehira
 " License: MIT
-"
+
 let s:sep = fnamemodify('.', ':p')[-1:]
 
 function! s:echo_err(message) abort
@@ -36,7 +36,7 @@ function! s:parse_dir(dir, ...) abort
 endfunction
 
 function! s:mkfile(file) abort
-	if has('win32') || has('win_64')
+	if has('win32') || has('win64')
 		if !executable('type')
 			throw 'generatedir: command "type" is not exist'
 		endif

@@ -1,0 +1,48 @@
+[
+	{
+		"name": "/Users/skanehira/dev/go/src/github.com/skanehira/test",
+		"type": "dir",
+		"children": [
+			{
+				"name": "plugin",
+				"type": "dir",
+				"children": [
+					{
+						"name": "test.vim",
+						"type": "file"
+					}
+				]
+			},
+			{
+				"name": "autoload",
+				"type": "dir",
+				"children": [
+					{
+						"name": "test.vim",
+						"type": "file"
+					}
+				]
+			},
+			{
+				"name": "syntax",
+				"type": "dir",
+				"children": [
+					{
+						"name": "test.vim",
+						"type": "file"
+					}
+				]
+			},
+			{
+				"name": "doc",
+				"type": "dir",
+				"children": [
+					{
+						"name": "test.txt",
+						"type": "file"
+					}
+				]
+			}
+		]
+	}
+]

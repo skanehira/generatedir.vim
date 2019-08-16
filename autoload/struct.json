@@ -1,0 +1,54 @@
+[
+	{
+		"name": "/project/root/path",
+		"type": "dir",
+		"children": [
+			{
+				"type": "file",
+				"name": "index.js"
+			},
+			{
+				"name": "node_modules",
+				"type": "dir",
+				"children": [
+					{
+						"name": "path",
+						"type": "dir",
+						"children": [
+							{
+								"type": "file",
+								"name": "path.js"
+							},
+							{
+								"type": "file",
+								"name": "package.json"
+							},
+							{
+								"type": "file",
+								"name": "README.md"
+							},
+							{
+								"type": "dir",
+								"name": "gorilla"
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "public",
+				"type": "dir",
+				"children": [
+					{
+						"name": "js",
+						"type": "dir"
+					},
+					{
+						"name": "css",
+						"type": "dir"
+					}
+				]
+			}
+		]
+	}
+]

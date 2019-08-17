@@ -4,6 +4,7 @@
 " License: MIT
 
 let s:sep = fnamemodify('.', ':p')[-1:]
+let s:plug_template_dir = expand('<sfile>:p:h:h') .. s:sep .. 'template'
 
 function! s:echo_err(message) abort
 	echohl ErrorMsg | echo a:message | echohl None
@@ -124,10 +125,9 @@ function! s:generate_cb(args, files, id, idx) abort
 endfunction
 
 function! generatedir#generate_from_template(...) abort
-	let plug_template_dir = expand('<sfile>:p:h') .. s:sep .. 'template'
 	let templates = map(
-				\ readdir(plug_template_dir),
-				\ '{"name": v:val, "path": plug_template_dir .. s:sep .. v:val}'
+				\ readdir(s:plug_template_dir),
+				\ '{"name": v:val, "path": s:plug_template_dir .. s:sep .. v:val}'
 				\ )
 
 	let user_template_dir = get(g:, 'generate_template_dir', '')

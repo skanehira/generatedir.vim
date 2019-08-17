@@ -13,7 +13,7 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 command! GenerateDirFromTemplate call generatedir#generate_from_template()
-command! -nargs=1 -complete=file GenerateDir call generatedir#generate_dir(<f-args>)
+command! -nargs=* -complete=file GenerateDir call generatedir#generate_dir(<f-args>)
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

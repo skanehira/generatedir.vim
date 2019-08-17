@@ -4,7 +4,7 @@
 " License: MIT
 
 let s:sep = fnamemodify('.', ':p')[-1:]
-let s:plug_template_dir = expand('<sfile>:p:h:h') .. s:sep .. 'generatedir#generate_from_template'
+let s:plug_template_dir = expand('<sfile>:p:h:h') .. s:sep .. 'generatedir-template'
 
 function! s:echo_err(message) abort
 	echohl ErrorMsg | echo a:message | echohl None

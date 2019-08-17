@@ -113,11 +113,17 @@ function! generatedir#generate_dir(...) abort
 	echo 'generate complete'
 endfunction
 
-function! s:generate_cb(files, id, idx) abort
-	call generatedir#generate_dir(a:files[a:idx-1].path)
+function! s:generate_cb(args, files, id, idx) abort
+	if a:idx ==# -1
+		return
+	endif
+	let args = []
+	call add(args, a:files[a:idx-1].path)
+	let args += a:args
+	call call('generatedir#generate_dir', args)
 endfunction
 
-function! generatedir#generate_from_template() abort
+function! generatedir#generate_from_template(...) abort
 	let plug_template_dir = expand('<sfile>:p:h') .. s:sep .. 'template'
 	let templates = map(
 				\ readdir(plug_template_dir),
@@ -135,7 +141,7 @@ function! generatedir#generate_from_template() abort
 
 	call popup_menu(map(copy(templates), 'v:val.name'), {
 				\ 'filter': 'popup_filter_menu',
-				\ 'callback': function('s:generate_cb', [templates]),
+				\ 'callback': function('s:generate_cb', [a:000, templates]),
 				\ 'border': [1, 1, 1, 1],
 				\ 'borderchars': ['-','|','-','|','+','+','+','+'],
 				\ })

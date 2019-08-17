@@ -66,6 +66,7 @@ sample.json
 :GenerateDir sample.json $root=$GOPATH/src/github.com/skanehira $plugin=gorilla
 
 " generate directory using template
-:GenerateDirFromTemplate
+" tempalts will display popup window
+:GenerateDirFromTemplate $root=$GOPATH/src/github.com/skanehira $plugin=gorilla
 ```
 

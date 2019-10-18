@@ -7,7 +7,7 @@ let s:sep = fnamemodify('.', ':p')[-1:]
 let s:plug_template_dir = expand('<sfile>:p:h:h') .. s:sep .. 'generatedir-template'
 
 function! s:echo_err(message) abort
-	echohl ErrorMsg | echo a:message | echohl None
+	echohl ErrorMsg | echom a:message | echohl None
 endfunction
 
 function! s:mkfile(file) abort
@@ -114,6 +114,35 @@ function! generatedir#generate_dir(...) abort
 	echo 'generate complete'
 endfunction
 
+function! s:generate_filter(ctx, id, key) abort
+	if a:key ==# 'j'
+		let idx = a:ctx.idx - 1
+		if idx < len(a:ctx.templates)
+			let a:ctx.idx = a:ctx.idx + 1
+		endif
+	elseif a:key ==# 'k'
+		if a:ctx.idx > 0
+			let a:ctx.idx = a:ctx.idx - 1
+		endif
+	elseif a:key ==# 'q'
+		call popup_close(a:id)
+		return 1
+	elseif a:key ==# "\<CR>"
+		let file =  a:ctx.templates[a:ctx.idx].path
+
+		let args = []
+		let vars = input('vars: ')
+		call add(args, file)
+		let args += split(vars)
+		call call('generatedir#generate_dir', args)
+
+		call popup_close(a:id)
+		return 1
+	endif
+
+	return popup_filter_menu(a:id, a:key)
+endfunction
+
 function! s:generate_cb(args, files, id, idx) abort
 	if a:idx ==# -1
 		return
@@ -139,9 +168,13 @@ function! generatedir#generate_from_template(...) abort
 					\ )
 	endif
 
-	call popup_menu(map(copy(templates), 'v:val.name'), {
-				\ 'filter': 'popup_filter_menu',
-				\ 'callback': function('s:generate_cb', [a:000, templates]),
+	let ctx = {
+		\ 'idx': 0,
+		\ 'templates': templates,
+		\ }
+
+	call popup_menu(map(copy(ctx.templates), 'v:val.name'), {
+				\ 'filter': function('s:generate_filter', [ctx]),
 				\ 'border': [1, 1, 1, 1],
 				\ 'borderchars': ['-','|','-','|','+','+','+','+'],
 				\ })

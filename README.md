@@ -65,8 +65,10 @@ sample.json
 " argment's value will expand path like expand("~/")
 :GenerateDir sample.json $root=$GOPATH/src/github.com/skanehira $plugin=gorilla
 
-" generate directory using template
-" tempalts will display popup window
-:GenerateDirFromTemplate $root=$GOPATH/src/github.com/skanehira $plugin=gorilla
+" generate directory using template.
+" templates will display in popup window.
+" when you press enter, you can input variables if you need input it.
+:GenerateDirFromTemplate
+vars $root=$GOPATH/src/github.com/skanehira $plugin=gorilla
 ```
 

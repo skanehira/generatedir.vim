@@ -159,9 +159,9 @@ function! generatedir#generate_from_template(...) abort
 	endif
 
 	let ctx = {
-		\ 'idx': 0,
-		\ 'templates': templates,
-		\ }
+				\ 'idx': 0,
+				\ 'templates': templates,
+				\ }
 
 	call popup_menu(map(copy(ctx.templates), 'v:val.name'), {
 				\ 'filter': function('s:generate_filter', [ctx]),

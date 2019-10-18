@@ -143,16 +143,6 @@ function! s:generate_filter(ctx, id, key) abort
 	return popup_filter_menu(a:id, a:key)
 endfunction
 
-function! s:generate_cb(args, files, id, idx) abort
-	if a:idx ==# -1
-		return
-	endif
-	let args = []
-	call add(args, a:files[a:idx-1].path)
-	let args += a:args
-	call call('generatedir#generate_dir', args)
-endfunction
-
 function! generatedir#generate_from_template(...) abort
 	let templates = map(
 				\ readdir(s:plug_template_dir),

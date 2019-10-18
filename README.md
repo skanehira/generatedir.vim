@@ -2,6 +2,8 @@
 This is a plugin that auto generates a directory structure.
 You can use the json to define directory structure.
 
+[![asciicast](https://asciinema.org/a/275381.svg)](https://asciinema.org/a/275381)
+
 # Settings
 ```vim
 let g:generate_template_dir = '/path/to/template'

@@ -13,14 +13,14 @@ endfunction
 function! s:mkfile(file) abort
 	if has('win32') || has('win64')
 		if !executable('type')
-			throw 'generatedir: command "type" is not exist'
+			throw '[generatedir] command "type" is not exist'
 		endif
 		for f in a:file
 			call system('type nul > ' .. f)
 		endfor
 	else
 		if !executable('touch')
-			throw 'generatedir: command "touch" is not exist'
+			throw '[generatedir] command "touch" is not exist'
 		endif
 		call system('touch ' .. join(a:file, ' '))
 	endif
@@ -35,7 +35,7 @@ function! s:parse_vars(args) abort
 	for arg in a:args
 		let kv = split(arg, "=")
 		if len(kv) < 2
-			throw 'generatedir: invalid args ' .. arg
+			throw '[generatedir] invalid args ' .. arg
 		endif
 		let results[kv[0]] = expand(kv[1])
 	endfor
@@ -63,7 +63,7 @@ function! s:bind_vars(vars, name) abort
 	endfor
 
 	if stridx(file, '$') !=# -1
-		throw 'generatedir: invalid name, argment required: ' .. file
+		throw '[generatedir] invalid name, argment required: ' .. file
 	endif
 	return file
 endfunction
@@ -77,7 +77,7 @@ function! s:parse_dir(vars, dir, ...) abort
 		let type = get(elem, 'type', '')
 
 		if empty(name) || empty(type)
-			throw 'generatedir: "name" or "type" is empty in json'
+			throw '[generatedir] "name" or "type" is empty in json'
 		endif
 
 		let children = get(elem, 'children', [])
@@ -100,7 +100,7 @@ function! generatedir#generate_dir(...) abort
 	try
 		let args = s:parse_args(a:000)
 		if !filereadable(args.file)
-			call s:echo_err('cannot read file ' .. args.file)
+			call s:echo_err('[generatedir] cannot read file ' .. args.file)
 			return
 		endif
 		let elements = s:parse_dir(args.vars, json_decode(join(readfile(args.file),'')))
